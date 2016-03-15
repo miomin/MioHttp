@@ -11,9 +11,9 @@ import java.util.Map;
 /**
  * Created by miomin on 16/3/7.
  */
-public class HttpUrlConnectionUtil {
+public class MioHttpUrlConnectionUtil {
 
-    public static String execute(Request request) throws IOException {
+    public static String execute(MioRequest request) throws IOException {
         switch (request.requset_method) {
             case GET:
             case DELELE:
@@ -26,10 +26,10 @@ public class HttpUrlConnectionUtil {
         return null;
     }
 
-    public static String get(Request request) throws IOException {
+    private static String get(MioRequest request) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
-        connection.setRequestMethod(request.requset_method.name());
+        connection.setRequestMethod("GET");
         connection.setConnectTimeout(15 * 3000);
         connection.setReadTimeout(15 * 3000);
 
@@ -52,10 +52,10 @@ public class HttpUrlConnectionUtil {
         return null;
     }
 
-    public static String post(Request request) throws IOException {
+    private static String post(MioRequest request) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
-        connection.setRequestMethod(request.requset_method.name());
+        connection.setRequestMethod("POST");
         connection.setConnectTimeout(15 * 3000);
         connection.setReadTimeout(15 * 3000);
         connection.setDoOutput(true);

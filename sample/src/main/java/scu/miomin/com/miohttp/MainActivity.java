@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import java.io.IOException;
-
-import scu.miomin.com.miohttplib.HttpUrlConnectionUtil;
-import scu.miomin.com.miohttplib.Request;
+import scu.miomin.com.miohttplib.MioRequest;
+import scu.miomin.com.miohttplib.MioRequestTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,20 +18,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        testHttpPost();
+        testHttpGet();
     }
 
-    public void testHttpGet() throws IOException {
+    public void testHttpGet() {
         String url = "http://api.stay4it.com";
-        Request request = new Request(url, Request.REQUSET_METHOD.GET);
-        String result = HttpUrlConnectionUtil.get(request);
-        Log.i(TAG, result);
+        MioRequest request = new MioRequest(url, MioRequest.REQUSET_METHOD.GET);
+
+        MioRequestTask requestTask = new MioRequestTask(request, new MioRequestTask.OnMioRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i(TAG, "get result:" + result);
+            }
+
+            @Override
+            public void onFaild(Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        requestTask.execute();
     }
 
-    public void testHttpPost() throws IOException {
+    public void testHttpPost() {
         String url = "http://api.stay4it.com/v1/public/core/?service=user.login";
         String content = "account=stay4it&password=123456";
-        Request request = new Request(url, content, Request.REQUSET_METHOD.POST);
-        String result = HttpUrlConnectionUtil.post(request);
-        Log.i(TAG, result);
+        MioRequest request = new MioRequest(url, content, MioRequest.REQUSET_METHOD.POST);
+
+        MioRequestTask requestTask = new MioRequestTask(request, new MioRequestTask.OnMioRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i(TAG, "post result:" + result);
+            }
+
+            @Override
+            public void onFaild(Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        requestTask.execute();
     }
 }
