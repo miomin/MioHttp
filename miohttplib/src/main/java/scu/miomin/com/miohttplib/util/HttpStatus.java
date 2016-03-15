@@ -1,4 +1,4 @@
-package scu.miomin.com.miohttplib;
+package scu.miomin.com.miohttplib.util;
 
 /**
  * Created by miomin on 16/3/7.

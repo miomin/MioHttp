@@ -3,8 +3,8 @@ package scu.miomin.com.miohttp;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 
-import scu.miomin.com.miohttplib.MioHttpUrlConnectionUtil;
-import scu.miomin.com.miohttplib.MioRequest;
+import scu.miomin.com.miohttplib.util.MioHttpUrlConnectionUtil;
+import scu.miomin.com.miohttplib.request.MioRequest;
 
 /**
  * Created by miomin on 16/3/7.
