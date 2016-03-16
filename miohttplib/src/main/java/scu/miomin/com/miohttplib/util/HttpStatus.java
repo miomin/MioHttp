@@ -1,7 +1,7 @@
 package scu.miomin.com.miohttplib.util;
 
 /**
- * Created by miomin on 16/3/7.
+ * Created by 莫绪旻 on 16/3/7.
  */
 public class HttpStatus {
 

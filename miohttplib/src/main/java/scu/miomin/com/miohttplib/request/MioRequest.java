@@ -2,10 +2,10 @@ package scu.miomin.com.miohttplib.request;
 
 import java.util.Map;
 
-import scu.miomin.com.miohttplib.parse.IMioRequestListener;
+import scu.miomin.com.miohttplib.interf.IMioRequestListener;
 
 /**
- * Created by miomin on 16/3/7.
+ * Created by 莫绪旻 on 16/3/7.
  */
 public class MioRequest {
 

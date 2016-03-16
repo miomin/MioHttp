@@ -1,4 +1,4 @@
-package scu.miomin.com.miohttplib.zdownloadfile;
+package scu.miomin.com.miohttplib.request;
 
 import android.content.Context;
 import android.os.Environment;
@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import scu.miomin.com.miohttplib.util.DownHelper;
 import scu.miomin.com.miohttplib.util.SDCardTool;
+import scu.miomin.com.miohttplib.interf.IMioDownLoadStateListener;
 
 /**
  * Created by 莫绪旻 on 16/2/20.
@@ -43,7 +45,7 @@ public class MioMultiResumeDownTask {
     /**
      * 下载过程变化的回调
      */
-    private MioDownLoadStateListener onDownLoadStateListener;
+    private IMioDownLoadStateListener onDownLoadStateListener;
 
     // 接受下载过程数据的Handler
     public Handler mHandler = new Handler() {
@@ -89,7 +91,7 @@ public class MioMultiResumeDownTask {
     private int fileLength = -1;
 
     // 构造器
-    public MioMultiResumeDownTask(Context context, String fileUrl, String tag,MioDownLoadStateListener onDownLoadStateListener) {
+    public MioMultiResumeDownTask(Context context, String fileUrl, String tag,IMioDownLoadStateListener onDownLoadStateListener) {
         try {
             this.fileUrl = fileUrl;
             this.context = context;
@@ -107,7 +109,7 @@ public class MioMultiResumeDownTask {
     /**
      * 开始下载
      */
-    public void startDownload() {
+    protected void startDownload() {
         downloading = true;
         // 开始下载的回调
         onDownLoadStateListener.OnDownLoadStart(fileLength);
@@ -168,7 +170,7 @@ public class MioMultiResumeDownTask {
     /**
      * 暂停下载
      */
-    public void resumeDownload() {
+    protected void resumeDownload() {
         downloading = false;
         // 暂停下载的回调
         onDownLoadStateListener.OnDownLoadResume(process);

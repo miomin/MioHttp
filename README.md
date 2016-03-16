@@ -1,53 +1,75 @@
-#MioHttp
+# MioHttp
 -------------
+ - 轻量HTTP访问框架，支持GET/POST/PUT/DELETE
+ - 支持多线程断点续传的文件下载
+ - 支持json/xml预处理，调用时不需要再解析，通过泛型返回需要的对象
+ - 封装请求错误的代码，统一处理
+ - 支持Activity生命周期绑定
+ 
+ 
+## Gradle
+```
+dependencies {
+    compile 'com.google.code.gson:gson:2.6.2'
+}
+```
 
-##Function
-1、支持GET/POST/PUT/DELETE<br>
-2、支持HTTPClient和HttpUrlConnection<br>
-3、多线程断点续传文件下载，支持暂停下载和进度更新<br>
-4、封装请求错误的代码，同意处理<br>
-4、预处理数据，直接返回对象<br>
-5、支持取消请求，支持Activity生命周期绑定,为每个Request绑定Tag与Activity向管理，通过MioRequestManager来管理所有的MioRequest<br>
-6、TIMEOUT重试，不需要用户手动刷新，可以在文件中配置最多重试的次数<br>(在MioHttpUrlConnectionUtil里抛出封装好的InterruptedIOException超时异常，在MioRequestTask中捕获异常，并且使用递归做重传，如果最终还是失败，return Exception)
-7、多任务HTTP请求队列<br>
-8、缓存刷新机制<br>
+>## Version
 
--------------
+>v2.0.0
+ - 封装MioRequest，HTTPURLConnection<br/>
+ - 支持GET/POST/PUT/DELETE<br/>
+  
+>v2.0.1
+ - 加入多线程断点续传文件下载，支持暂停下载和进度更新 <br />
 
+>v2.0.2
+ - 预处理数据，直接返回对象，支持自动JSON/XML生成对象 <br />
 
+>v2.0.4
+ - 封装请求错误的代码，统一处理 <br />
+
+>v2.0.5
+ - 支持Activity生命周期绑定，通过MioRequestManager来管理所有的请求 <br />
+
+>v2.0.6
+ - 加入TIMEOUT重试机制，不需手动刷新 <br />
+
+>v2.0.7
+ - 支持单文件上传与多文件上传。<br />
+ - 最近会更新。<br />
+ 
 ## Usage
 
-###Get请求Json，直接返回对象
+### Get请求Json，直接返回对象
 ```java
 
 
 ```
 
-###Get请求Xml，直接返回对象
+### Get请求Xml，直接返回对象
 ```java
 
 
 ```
 
-###Get请求String
+### Get请求String
 ```java
 
 
 ```
 
-###DownloadFiles
+### DownloadFiles
 ```java
 
 
 ```
 
-###MioRequest与Activity生命周期绑定
+### MioRequest与Activity生命周期绑定
 
 ```java
-
-        // 实现request与Activity生命周期绑定
-        MioRequestManager.getInstance().cancelRequest(toString());
-        
+// 实现request与Activity生命周期绑定
+MioRequestManager.getInstance().cancelRequest(toString());        
 ```
 
 

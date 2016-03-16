@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import scu.miomin.com.miohttplib.task.MioRequestTask;
-import scu.miomin.com.miohttplib.zdownloadfile.MioMultiResumeDownTask;
 
 /**
- * Created by miomin on 16/3/16.
+ * Created by 莫绪旻 on 16/3/16.
  */
 public class MioRequestManager {
 
@@ -42,11 +41,17 @@ public class MioRequestManager {
 
     // 执行文件下载任务
     public void excuteDownTask(MioMultiResumeDownTask task) {
+        task.startDownload();
         if (!downtaskMap.containsKey(task.getTag())) {
             ArrayList<MioMultiResumeDownTask> downTasks = new ArrayList<>();
             downtaskMap.put(task.getTag(), downTasks);
         }
         downtaskMap.get(task.getTag()).add(task);
+    }
+
+    // 暂停文件下载任务
+    public void resumeDownTask(MioMultiResumeDownTask task) {
+        task.resumeDownload();
     }
 
     // 取消与tag的Activity相关的所有任务

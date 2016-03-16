@@ -13,7 +13,7 @@ import scu.miomin.com.miohttplib.util.HttpStatus;
 import scu.miomin.com.miohttplib.util.MioHttpUrlConnectionUtil;
 
 /**
- * Created by miomin on 16/3/7.
+ * Created by 莫绪旻 on 16/3/7.
  */
 public class MioRequestTask extends AsyncTask<Void, Integer, Object> {
 

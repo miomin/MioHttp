@@ -1,4 +1,4 @@
-package scu.miomin.com.miohttplib.zdownloadfile;
+package scu.miomin.com.miohttplib.util;
 
 import android.content.Context;
 import android.widget.Toast;

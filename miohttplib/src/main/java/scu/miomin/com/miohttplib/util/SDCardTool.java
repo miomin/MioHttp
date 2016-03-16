@@ -1,7 +1,7 @@
 package scu.miomin.com.miohttplib.util;
 
 /**
- * Created by miomin on 16/2/20.
+ * Created by 莫绪旻 on 16/2/20.
  */
 public class SDCardTool {
     public static boolean ExistSDCard() {

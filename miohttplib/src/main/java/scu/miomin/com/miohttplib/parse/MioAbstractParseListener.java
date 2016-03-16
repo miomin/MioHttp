@@ -8,10 +8,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 import scu.miomin.com.miohttplib.error.MioException;
+import scu.miomin.com.miohttplib.interf.IMioRequestListener;
 import scu.miomin.com.miohttplib.util.HttpStatus;
 
 /**
- * Created by miomin on 16/3/15.
+ * Created by 莫绪旻 on 16/3/15.
  */
 public abstract class MioAbstractParseListener<T> implements IMioRequestListener<T> {
 

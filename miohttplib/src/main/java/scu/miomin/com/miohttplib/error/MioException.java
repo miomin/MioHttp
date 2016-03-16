@@ -1,7 +1,7 @@
 package scu.miomin.com.miohttplib.error;
 
 /**
- * Created by miomin on 16/3/16.
+ * Created by 莫绪旻 on 16/3/16.
  */
 public class MioException extends Exception {
 

@@ -1,11 +1,11 @@
-package scu.miomin.com.miohttplib.zdownloadfile;
+package scu.miomin.com.miohttplib.interf;
 
 import java.io.File;
 
 /**
- * Created by miomin on 16/3/15.
+ * Created by 莫绪旻 on 16/3/15.
  */
-public interface MioDownLoadStateListener {
+public interface IMioDownLoadStateListener {
 
     /**
      * 下载进度变化的回调

@@ -18,8 +18,8 @@ import scu.miomin.com.miohttplib.parse.JsonRequestListener;
 import scu.miomin.com.miohttplib.parse.StringRequestListener;
 import scu.miomin.com.miohttplib.request.MioRequest;
 import scu.miomin.com.miohttplib.request.MioRequestManager;
-import scu.miomin.com.miohttplib.zdownloadfile.MioDownLoadStateListener;
-import scu.miomin.com.miohttplib.zdownloadfile.MioMultiResumeDownTask;
+import scu.miomin.com.miohttplib.interf.IMioDownLoadStateListener;
+import scu.miomin.com.miohttplib.request.MioMultiResumeDownTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         multiResumeDownTask =
                 new MioMultiResumeDownTask(MainActivity.this,
                         "http://192.168.253.1:8080/test.pdf", toString(),
-                        new MioDownLoadStateListener() {
+                        new IMioDownLoadStateListener() {
                             // 这是监听MultiResumeDownloader下载过程的回调
                             @Override
                             public void OnDownLoadProcessChange(int process) {
@@ -86,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!multiResumeDownTask.isDownloading()) {
                     // 开始下载
-                    multiResumeDownTask.startDownload();
+                    MioRequestManager.getInstance().excuteDownTask(multiResumeDownTask);
                 } else {
-                    multiResumeDownTask.resumeDownload();
+                    // 暂停下载
+                    MioRequestManager.getInstance().resumeDownTask(multiResumeDownTask);
                 }
             }
         });

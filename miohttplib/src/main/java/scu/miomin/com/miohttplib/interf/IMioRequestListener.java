@@ -1,4 +1,4 @@
-package scu.miomin.com.miohttplib.parse;
+package scu.miomin.com.miohttplib.interf;
 
 import org.json.JSONException;
 
@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import scu.miomin.com.miohttplib.error.MioException;
 
 /**
- * Created by miomin on 16/3/15.
+ * Created by 莫绪旻 on 16/3/15.
  */
 public interface IMioRequestListener<T> {
     void onSuccess(T result);
