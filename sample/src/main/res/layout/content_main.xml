@@ -12,8 +12,10 @@
     tools:context="scu.miomin.com.miohttp.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnDown"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="开始下载" />
+
 </RelativeLayout>
