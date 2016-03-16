@@ -104,9 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFaild(Exception exception) {
-                exception.printStackTrace();
+                Log.i("miomin", "网络请求失败");
             }
         });
+        // 为request设置tag
+        request.setTag(toString());
 
         MioRequestTask requestTask = new MioRequestTask(request);
         requestTask.execute();
@@ -117,15 +119,16 @@ public class MainActivity extends AppCompatActivity {
         MioRequest request = new MioRequest(url, MioRequest.REQUSET_METHOD.GET, new JsonRequestListener<Xianxing>() {
             @Override
             public void onSuccess(Xianxing result) {
-
                 Log.i(TAG, "get result:" + result.toString());
             }
 
             @Override
             public void onFaild(Exception exception) {
-                exception.printStackTrace();
+                Log.i("miomin", "网络请求失败");
             }
         }.setRootKey("result"));
+        // 为request设置tag
+        request.setTag(toString());
 
         MioRequestTask requestTask = new MioRequestTask(request);
         requestTask.execute();

@@ -1,11 +1,15 @@
 package scu.miomin.com.miohttplib.util;
 
+import android.webkit.URLUtil;
+
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
+import scu.miomin.com.miohttplib.error.MioException;
 import scu.miomin.com.miohttplib.request.MioRequest;
 
 /**
@@ -13,7 +17,10 @@ import scu.miomin.com.miohttplib.request.MioRequest;
  */
 public class MioHttpUrlConnectionUtil {
 
-    public static HttpURLConnection execute(MioRequest request) throws IOException {
+    public static HttpURLConnection execute(MioRequest request) throws MioException {
+        if (!URLUtil.isNetworkUrl(request.url)) {
+            throw new MioException(HttpStatus.NO_URL);
+        }
         switch (request.requset_method) {
             case GET:
             case DELELE:
@@ -26,32 +33,44 @@ public class MioHttpUrlConnectionUtil {
         return null;
     }
 
-    private static HttpURLConnection get(MioRequest request) throws IOException {
+    private static HttpURLConnection get(MioRequest request) throws MioException {
 
-        HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
-        connection.setRequestMethod("GET");
-        connection.setConnectTimeout(15 * 3000);
-        connection.setReadTimeout(15 * 3000);
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(15 * 3000);
+            connection.setReadTimeout(15 * 3000);
 
-        addProperty(connection, request.headers);
+            addProperty(connection, request.headers);
 
-        return connection;
+            return connection;
+        } catch (InterruptedIOException e) {
+            throw new MioException(HttpStatus.TIMEOUT, e);
+        } catch (IOException e) {
+            throw new MioException(HttpStatus.IO_ERROR, e);
+        }
     }
 
-    private static HttpURLConnection post(MioRequest request) throws IOException {
+    private static HttpURLConnection post(MioRequest request) throws MioException {
 
-        HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
-        connection.setRequestMethod("POST");
-        connection.setConnectTimeout(15 * 3000);
-        connection.setReadTimeout(15 * 3000);
-        connection.setDoOutput(true);
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(request.url).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(15 * 3000);
+            connection.setReadTimeout(15 * 3000);
+            connection.setDoOutput(true);
 
-        addProperty(connection, request.headers);
+            addProperty(connection, request.headers);
 
-        OutputStream os = connection.getOutputStream();
-        os.write(request.content.getBytes());
+            OutputStream os = connection.getOutputStream();
+            os.write(request.content.getBytes());
 
-        return connection;
+            return connection;
+        } catch (InterruptedIOException e) {
+            throw new MioException(HttpStatus.TIMEOUT, e);
+        } catch (IOException e) {
+            throw new MioException(HttpStatus.IO_ERROR, e);
+        }
     }
 
     private static void addProperty(HttpURLConnection connection, Map<String, String> headers) {

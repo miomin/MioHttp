@@ -9,6 +9,9 @@ import scu.miomin.com.miohttplib.parse.IMioRequestListener;
  */
 public class MioRequest {
 
+    //timeout后最多重试三次
+    public int MaxReCount = 3;
+
     public IMioRequestListener iMioRequestListener;
 
     public enum REQUSET_METHOD {GET, POST, PUT, DELELE}
@@ -17,6 +20,8 @@ public class MioRequest {
     public String content;
     public Map<String, String> headers;
     public REQUSET_METHOD requset_method;
+
+    private String tag;
 
     public MioRequest(String url, String content, REQUSET_METHOD requset_method, IMioRequestListener iMioRequestListener) {
         this.url = url;
@@ -29,5 +34,17 @@ public class MioRequest {
         this.url = url;
         this.requset_method = requset_method;
         this.iMioRequestListener = iMioRequestListener;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void cancle() {
+
     }
 }

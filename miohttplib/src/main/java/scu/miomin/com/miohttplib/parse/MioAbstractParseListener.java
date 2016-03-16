@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import scu.miomin.com.miohttplib.error.MioException;
 import scu.miomin.com.miohttplib.util.HttpStatus;
 
 /**
@@ -15,7 +16,7 @@ import scu.miomin.com.miohttplib.util.HttpStatus;
 public abstract class MioAbstractParseListener<T> implements IMioRequestListener<T> {
 
     @Override
-    public T parse(HttpURLConnection connection) throws IOException, JSONException {
+    public T parse(HttpURLConnection connection) throws MioException,IOException, JSONException {
 
         int status = connection.getResponseCode();
         if (status == HttpStatus.SC_OK) {
@@ -33,8 +34,9 @@ public abstract class MioAbstractParseListener<T> implements IMioRequestListener
             String result = new String(out.toByteArray());
 
             return bindData(result);
+        } else {
+            throw new MioException(HttpStatus.CON_FAILED);
         }
-        return null;
     }
 
     protected abstract T bindData(String result) throws JSONException;
