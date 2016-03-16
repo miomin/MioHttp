@@ -29,6 +29,17 @@ public class MioMultiResumeDownTask {
     // 下载过程跟踪进度
     private static final int DOWNLOADPROCESS = 2;
 
+    // 用tag将下载的task与activity绑定
+    private String tag;
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
     /**
      * 下载过程变化的回调
      */
@@ -78,7 +89,7 @@ public class MioMultiResumeDownTask {
     private int fileLength = -1;
 
     // 构造器
-    public MioMultiResumeDownTask(Context context, String fileUrl, MioDownLoadStateListener onDownLoadStateListener) {
+    public MioMultiResumeDownTask(Context context, String fileUrl, String tag,MioDownLoadStateListener onDownLoadStateListener) {
         try {
             this.fileUrl = fileUrl;
             this.context = context;
@@ -87,6 +98,7 @@ public class MioMultiResumeDownTask {
             this.url = new URL(fileUrl);
             this.threadList = new ArrayList<>();
             this.onDownLoadStateListener = onDownLoadStateListener;
+            this.tag = tag;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -41,6 +41,15 @@
 
 ```
 
+###MioRequest与Activity生命周期绑定
+
+```java
+
+        // 实现request与Activity生命周期绑定
+        MioRequestManager.getInstance().cancelRequest(toString());
+        
+```
+
 
 -------------
 

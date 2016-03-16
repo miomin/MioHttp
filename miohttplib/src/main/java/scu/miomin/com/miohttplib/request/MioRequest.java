@@ -14,6 +14,7 @@ public class MioRequest {
 
     public IMioRequestListener iMioRequestListener;
 
+
     public enum REQUSET_METHOD {GET, POST, PUT, DELELE}
 
     public String url;
@@ -46,5 +47,9 @@ public class MioRequest {
 
     public void cancle() {
 
+    }
+
+    public boolean isCancle() {
+        return false;
     }
 }

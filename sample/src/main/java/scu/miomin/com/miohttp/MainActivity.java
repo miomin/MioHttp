@@ -17,7 +17,7 @@ import java.io.File;
 import scu.miomin.com.miohttplib.parse.JsonRequestListener;
 import scu.miomin.com.miohttplib.parse.StringRequestListener;
 import scu.miomin.com.miohttplib.request.MioRequest;
-import scu.miomin.com.miohttplib.task.MioRequestTask;
+import scu.miomin.com.miohttplib.request.MioRequestManager;
 import scu.miomin.com.miohttplib.zdownloadfile.MioDownLoadStateListener;
 import scu.miomin.com.miohttplib.zdownloadfile.MioMultiResumeDownTask;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // 下面的url是需要下载的文件在服务器上的url
         multiResumeDownTask =
                 new MioMultiResumeDownTask(MainActivity.this,
-                        "http://192.168.253.1:8080/test.pdf",
+                        "http://192.168.253.1:8080/test.pdf", toString(),
                         new MioDownLoadStateListener() {
                             // 这是监听MultiResumeDownloader下载过程的回调
                             @Override
@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         // 为request设置tag
         request.setTag(toString());
 
-        MioRequestTask requestTask = new MioRequestTask(request);
-        requestTask.execute();
+        //执行request
+        MioRequestManager.getInstance().excuteRequest(request);
     }
 
     public void testHttpJsonGet() {
@@ -130,8 +130,15 @@ public class MainActivity extends AppCompatActivity {
         // 为request设置tag
         request.setTag(toString());
 
-        MioRequestTask requestTask = new MioRequestTask(request);
-        requestTask.execute();
+        //执行request
+        MioRequestManager.getInstance().excuteRequest(request);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 实现request与Activity生命周期绑定
+        MioRequestManager.getInstance().cancelRequest(toString());
     }
 
     // 申请需要的运行时权限

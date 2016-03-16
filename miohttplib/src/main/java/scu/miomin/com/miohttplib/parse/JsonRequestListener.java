@@ -23,8 +23,9 @@ public abstract class JsonRequestListener<T> extends MioAbstractParseListener<T>
 
     @Override
     protected T bindData(String result) throws JSONException {
+        // 可以处理list也可以处理单个对象
         JSONObject json = new JSONObject(result);
-        JSONObject data = json.optJSONObject(rootKey);
+        Object data = json.opt(rootKey);
         Gson gson = new Gson();
         Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         return gson.fromJson(data.toString(), type);
