@@ -42,7 +42,8 @@ dependencies {
  - 最近会更新。<br />
  
 ## Usage
-### Get请求Json，直接返回对象
+### 请求Json，直接返回对象
+ - 设置泛型，按照Gson的要求构造类，即可自动解析json，直接返回对象
 ```java
 public void testHttpJsonGet() {
         String url = "http://v.juhe.cn/xianxing/index?key=48cfb0f1ae6a5666274147e99b6838fa&city=beijing&type=1";
@@ -65,7 +66,7 @@ public void testHttpJsonGet() {
     }
 ```
 
-### Get请求String
+### 返回String
 ```java
 public void testHttpStringGet() {
         String url = "http://v.juhe.cn/xianxing/index?key=48cfb0f1ae6a5666274147e99b6838fa&city=beijing&type=1";
