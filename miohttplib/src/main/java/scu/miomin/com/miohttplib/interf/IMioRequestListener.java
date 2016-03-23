@@ -11,6 +11,7 @@ import scu.miomin.com.miohttplib.error.MioException;
  * Created by 莫绪旻 on 16/3/15.
  */
 public interface IMioRequestListener<T> {
+
     void onSuccess(T result);
 
     void onFaild(Exception exception);

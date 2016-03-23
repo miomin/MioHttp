@@ -17,7 +17,7 @@ import scu.miomin.com.miohttplib.util.HttpStatus;
 public abstract class MioAbstractParseListener<T> implements IMioRequestListener<T> {
 
     @Override
-    public T parse(HttpURLConnection connection) throws MioException,IOException, JSONException {
+    public T parse(HttpURLConnection connection) throws MioException, IOException, JSONException {
 
         int status = connection.getResponseCode();
         if (status == HttpStatus.SC_OK) {
