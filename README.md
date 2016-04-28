@@ -1,4 +1,7 @@
 # MioHttp
+
+参考stay老师的：造轮子系列-自己来写Http框架
+
 -------------
  - 轻量HTTP访问框架，支持GET/POST/PUT/DELETE
  - 支持多线程断点续传的文件下载
